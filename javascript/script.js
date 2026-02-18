@@ -4,7 +4,7 @@ let logConsoleMessage = () => {
   console.log(
     "%c👋 Hey there" +
       "\n\n%cLooks like you're poking around in the console. Why not add your site to the webring?" +
-      "\n\n%c→ https://github.com/JusGu/uwatering",
+      "\n\n%c→ https://github.com/ryanpolasky/utdring",
     "font-size: 18px; font-weight: bold; color: #FF3366;",
     "font-size: 14px; color: #00FF00;",
     "font-size: 14px; color: #3399FF; text-decoration: underline;"
@@ -94,8 +94,8 @@ function filterWebring(searchTerm) {
   createWebringList(matchedSiteIndices);
 }
 let navigateWebring = () => {
-  // https://cs.uwatering.com/#your-site-here?nav=next OR
-  // https://cs.uwatering.com/#your-site-here?nav=prev
+  // https://cs.utdring.com/#your-site-here?nav=next OR
+  // https://cs.utdring.com/#your-site-here?nav=prev
   const fragment = window.location.hash.slice(1); // #your-site-here?nav=
   if (!fragment.includes("?")) return;
 
@@ -123,10 +123,25 @@ let navigateWebring = () => {
   if (newIndex < 0) newIndex = webringData.sites.length - 1;
   if (!webringData.sites[newIndex]) return;
 
+  document.body.className = "bg-mustard-100";
+
   document.body.innerHTML = `
-  <main class="p-6 min-h-[100vh] w-[100vw] text-black-900">
-    <p class="font-latinMonoCondOblique">redirecting...</p>
-  </main>
+    <main class="text-black-900 px-2 py-6 sm:p-6 min-h-[100vh] w-[100vw] flex flex-col items-center justify-center">
+      
+      <header class="site-header mb-12">
+        <img class="site-logo" src="webAssets/logoOnWhite.svg" alt="UTD Webring logo" />
+        <p class="site-title" aria-label="computer science webring">
+          <span>computer</span>
+          <span>science</span>
+          <span>webring</span>
+        </p>
+      </header>
+  
+      <p class="font-latinMonoCaps text-sm tracking-wide">
+        REDIRECTING...
+      </p>
+  
+    </main>
   `;
   window.location.href = webringData.sites[newIndex].website;
 };
